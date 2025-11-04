@@ -1,14 +1,17 @@
-import React from 'react'
-import HeaderTodo from './HeaderTodo/HeaderTodo'
-import BodyTodo from './BodyTodo/BodyTodo'
+import React from "react";
+import HeaderTodo from "./HeaderTodo/HeaderTodo";
+import BodyTodo from "./BodyTodo/BodyTodo";
+import "./Todo.css";
 
 const Todo = () => {
   return (
-    <>
-        <HeaderTodo/>
-        <BodyTodo/>
-    </>
-  )
-}
+    <div className="Todo">
+      <div className="Todo__container">
+        <HeaderTodo />
+        <BodyTodo />
+      </div>
+    </div>
+  );
+};
 
-export default Todo
+export default Todo;

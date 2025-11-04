@@ -1,3 +1,9 @@
 .Task{
     display: flex;
+    width: 100%;
+    justify-content: space-between;
+    .Task__btns{
+        display: flex;
+        column-gap: 10px;
+    }
 }

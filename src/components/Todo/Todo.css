@@ -1,0 +1,9 @@
+.Todo{
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.Todo__container{
+    min-width: 580px;
+    padding: 10px;
+}
