@@ -1,11 +1,18 @@
-.InputTask{
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
+.InputTask {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
 }
-.InputTask__input{
-    #InputTask__input-text{
-        width: 100%;
-        padding: 10px 0;
-    }
+.InputTask__input {
+  #InputTask__input-text {
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+
+.InputTask__add__btn:hover {
+  background-color: white;
+  color: black;
+  border-color: white;
+  cursor: pointer;
 }

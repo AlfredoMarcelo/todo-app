@@ -41,8 +41,8 @@ const InputTask = ({handleAddTask}) => {
       <div className="InputTask__input">
         <input value={valueInput}  onChange={(e)=>handleInputValue(e)} placeholder="Estudiar para prueba.." type="text" name="" id="InputTask__input-text" />
       </div>
-      <div className="InputTask__add__btn">
-        <button onClick={handlePushTask}>Agregar Tarea</button>
+      <div className="InputTask__add">
+        <button className="InputTask__add__btn" onClick={handlePushTask}>Agregar Tarea</button>
       </div>
     </div>
   );

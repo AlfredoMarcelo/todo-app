@@ -16,12 +16,22 @@ const Todo = () => {
   const [tasks, setTasks] = useState(data ? data : []);
 
   // funcion para agregar nueva tarea al arreglo
-  const handleAddTask = (newTask) => {setTasks([...tasks,newTask])};
+  const handleAddTask = (newTask) => {setTasks([newTask,...tasks])};
+  // funcion para eliminar tarea al arreglo
+  const handleDeleteTask = (taskToDeletID) => {
+    console.log(taskToDeletID)
+    //=>  recorrer lista actual
+    //=> buscar por id
+    //=> filtrar el id y crear nuevo arreglo sin el id
+    const tasksWithoutTaskDeleted = tasks.filter(task => task.id !== taskToDeletID)
+    //=> setear lista por nueva copia
+    setTasks(tasksWithoutTaskDeleted)
+  };
   return (
     <div className="Todo">
       <div className="Todo__container">
-        <HeaderTodo handleAddTask={handleAddTask} />
-        <BodyTodo tasks={tasks} />
+        <HeaderTodo handleAddTask={handleAddTask}  />
+        <BodyTodo tasks={tasks} handleDeleteTask={handleDeleteTask}/>
       </div>
     </div>
   );
