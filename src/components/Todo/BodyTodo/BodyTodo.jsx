@@ -1,10 +1,10 @@
 import React from 'react'
 import TaskList from './TaskList/TaskList'
 
-const BodyTodo = () => {
+const BodyTodo = ({tasks, }) => {
   return (
     <div className=''>
-        <TaskList/>
+        <TaskList tasks={tasks}/>
     </div>
   )
 }

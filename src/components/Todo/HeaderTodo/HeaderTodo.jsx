@@ -2,11 +2,11 @@ import React from 'react'
 import Title from './Title/Title'
 import InputTask from './InputTask/InputTask'
 
-const HeaderTodo = () => {
+const HeaderTodo = ({handleAddTask}) => {
   return (
     <div>
         <Title/>
-        <InputTask/>
+        <InputTask handleAddTask={handleAddTask}/>
     </div>
   )
 }
