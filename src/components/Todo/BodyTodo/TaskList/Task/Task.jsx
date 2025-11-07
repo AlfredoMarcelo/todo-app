@@ -3,15 +3,14 @@ import "./Task.css";
 import EditIcon from "../../../Icons/EditIcon";
 import DeleteIcon from "../../../Icons/DeleteIcon";
 
-const Task = ({ task, IDTask, handleDeleteTask}) => {
-  console.log(IDTask)
+const Task = ({ task, IDTask, handleDeleteTask, handleUpdateTask}) => {
   return (
     <>
       <li className="Task">
         {task}
         <div className="Task__btns">
-          <button className="Task__btn_edit" type="button">
-            <EditIcon />
+          <button className="Task__btn_edit" type="button" onClick={() => handleUpdateTask(IDTask)}>
+            <EditIcon/>
           </button>
           <button className="Task__btn_delete" type="button" onClick={() =>handleDeleteTask(IDTask)}>
             <DeleteIcon />

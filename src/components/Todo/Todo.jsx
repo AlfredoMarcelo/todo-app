@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderTodo from "./HeaderTodo/HeaderTodo";
 import BodyTodo from "./BodyTodo/BodyTodo";
 import "./Todo.css";
@@ -14,24 +14,38 @@ const data = [
 
 const Todo = () => {
   const [tasks, setTasks] = useState(data ? data : []);
+  const [taskToUpdate, setTaskToUpdate] = useState("")
+  const [taskUpdated, setTaskUpdated] = useState(null)
 
   // funcion para agregar nueva tarea al arreglo
   const handleAddTask = (newTask) => {setTasks([newTask,...tasks])};
   // funcion para eliminar tarea al arreglo
   const handleDeleteTask = (taskToDeletID) => {
-    console.log(taskToDeletID)
-    //=>  recorrer lista actual
-    //=> buscar por id
-    //=> filtrar el id y crear nuevo arreglo sin el id
     const tasksWithoutTaskDeleted = tasks.filter(task => task.id !== taskToDeletID)
-    //=> setear lista por nueva copia
     setTasks(tasksWithoutTaskDeleted)
   };
+
+  // funcion para capturar tarea desde Lista y enviar a input para editar
+  const handleUpdateTask = (taskToUpdateID) => {
+    const taskToUpdate = tasks.map(task => task).find(taskFound => taskFound.id === taskToUpdateID)
+    console.log(taskToUpdate)
+    if(!taskToUpdate) return
+    setTaskToUpdate(taskToUpdate.task)
+    setTaskUpdated(taskToUpdate)
+  };
+
+  // funcion para guardar tarea editada y crear nuevo arreglo
+  const handleSaveUpdateTask = (taskUpdateFromInput) => {
+    
+    const arrWithTaskUpdated = tasks.map(task => task.id === taskToUpdate.id? task.task === taskToUpdate:task)
+    setTasks(arrWithTaskUpdated)
+  }
+
   return (
     <div className="Todo">
       <div className="Todo__container">
-        <HeaderTodo handleAddTask={handleAddTask}  />
-        <BodyTodo tasks={tasks} handleDeleteTask={handleDeleteTask}/>
+        <HeaderTodo handleAddTask={handleAddTask}  taskToUpdate={taskToUpdate} handleSaveUpdateTask={handleSaveUpdateTask}/>
+        <BodyTodo tasks={tasks} handleDeleteTask={handleDeleteTask} handleUpdateTask={handleUpdateTask}/>
       </div>
     </div>
   );

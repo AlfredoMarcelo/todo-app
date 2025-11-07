@@ -1,40 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './InputTask.css'
+import { generateId } from "../../../../utils/generateID";
 
-function generateId() {
-	return crypto.randomUUID()
-}
+const InputTask = ({handleAddTask, taskToUpdate, handleSaveUpdateTask}) => {
 
-
-const InputTask = ({handleAddTask}) => {
-
-  const [newTask, setNewTask] = useState({})
   const [valueInput, setValueInput] = useState("")
+  
   
   const handleInputValue = (event) =>{
     const newTask = event.target.value
     setValueInput(newTask)
-    if(!newTask.trim())return
-    createTask(newTask)
   }
-
-  const createTask = (newTask) =>{
-    const createdTask = {
-      id: generateId(),
-      task: newTask,
-      done: false
-    }
-    setNewTask(createdTask)
-  }
-
   
   const handlePushTask = () =>{
-    console.log("entroo")
     if(!valueInput.trim())return
-    console.log("pero no paso")
-    handleAddTask(newTask)
+    const createdTask = {
+      id: generateId(),
+      task: valueInput,
+      done: false
+    }
+    handleAddTask(createdTask)
     setValueInput("")
   }
+  // al renderizar verifica si en la props esta el nombre de la tarea a editar
+  // si esta presente, setea el valor de input para editar y cambia el boton
+  useEffect(()=>{
+    if(taskToUpdate){
+      setValueInput(taskToUpdate)
+    }
+  }, [taskToUpdate])
 
   return (
     <div className="InputTask">
@@ -42,7 +36,11 @@ const InputTask = ({handleAddTask}) => {
         <input value={valueInput}  onChange={(e)=>handleInputValue(e)} placeholder="Estudiar para prueba.." type="text" name="" id="InputTask__input-text" />
       </div>
       <div className="InputTask__add">
-        <button className="InputTask__add__btn" onClick={handlePushTask}>Agregar Tarea</button>
+        { taskToUpdate ?
+          <button className="InputTask__add__btn" onClick={handleSaveUpdateTask}>Guardar cambios</button>
+          :
+          <button className="InputTask__add__btn" onClick={handlePushTask}>Agregar Tarea</button>
+        }
       </div>
     </div>
   );
