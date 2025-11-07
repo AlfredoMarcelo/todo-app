@@ -22,6 +22,12 @@ const InputTask = ({handleAddTask, taskToUpdate, handleSaveUpdateTask}) => {
     handleAddTask(createdTask)
     setValueInput("")
   }
+
+  const handlePushUpdateTask = () =>{
+     if(!valueInput.trim())return
+    handleSaveUpdateTask(valueInput)
+    setValueInput("")
+  }
   // al renderizar verifica si en la props esta el nombre de la tarea a editar
   // si esta presente, setea el valor de input para editar y cambia el boton
   useEffect(()=>{
@@ -37,7 +43,7 @@ const InputTask = ({handleAddTask, taskToUpdate, handleSaveUpdateTask}) => {
       </div>
       <div className="InputTask__add">
         { taskToUpdate ?
-          <button className="InputTask__add__btn" onClick={handleSaveUpdateTask}>Guardar cambios</button>
+          <button className="InputTask__add__btn" onClick={handlePushUpdateTask}>Guardar cambios</button>
           :
           <button className="InputTask__add__btn" onClick={handlePushTask}>Agregar Tarea</button>
         }

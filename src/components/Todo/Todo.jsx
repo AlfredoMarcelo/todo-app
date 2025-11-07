@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import HeaderTodo from "./HeaderTodo/HeaderTodo";
 import BodyTodo from "./BodyTodo/BodyTodo";
 import "./Todo.css";
@@ -27,18 +27,20 @@ const Todo = () => {
 
   // funcion para capturar tarea desde Lista y enviar a input para editar
   const handleUpdateTask = (taskToUpdateID) => {
-    const taskToUpdate = tasks.map(task => task).find(taskFound => taskFound.id === taskToUpdateID)
-    console.log(taskToUpdate)
-    if(!taskToUpdate) return
-    setTaskToUpdate(taskToUpdate.task)
-    setTaskUpdated(taskToUpdate)
+    const copyTaskToUpdate = tasks.map(task => task).find(taskFound => taskFound.id === taskToUpdateID)
+    console.log(copyTaskToUpdate)
+    if(!copyTaskToUpdate) return
+    setTaskUpdated(copyTaskToUpdate)
+    setTaskToUpdate(copyTaskToUpdate.task)
   };
 
   // funcion para guardar tarea editada y crear nuevo arreglo
   const handleSaveUpdateTask = (taskUpdateFromInput) => {
-    
-    const arrWithTaskUpdated = tasks.map(task => task.id === taskToUpdate.id? task.task === taskToUpdate:task)
+    const copyTask = {...taskUpdated, task: taskUpdateFromInput}
+    const arrWithTaskUpdated = tasks.map(task => task.id === taskUpdated.id ? copyTask : task)
+    console.log(arrWithTaskUpdated)
     setTasks(arrWithTaskUpdated)
+    setTaskToUpdate("")
   }
 
   return (
