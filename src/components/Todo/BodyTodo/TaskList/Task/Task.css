@@ -7,3 +7,7 @@
         column-gap: 10px;
     }
 }
+
+.Task__name--done{
+    text-decoration: line-through;
+}

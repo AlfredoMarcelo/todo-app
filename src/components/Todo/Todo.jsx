@@ -6,9 +6,9 @@ import "./Todo.css";
 // enviamos datos a componentes hijos
 const data = [
   { id: 1, task: "Lavar los platos", done: false },
-  { id: 2, task: "Hacer las compras", done: true },
+  { id: 2, task: "Hacer las compras", done: false },
   { id: 3, task: "Estudiar JavaScript", done: false },
-  { id: 4, task: "Sacar al perro", done: true },
+  { id: 4, task: "Sacar al perro", done: false },
   { id: 5, task: "Llamar al cliente", done: false },
 ];
 
@@ -43,11 +43,20 @@ const Todo = () => {
     setTaskToUpdate("")
   }
 
+  // funcion para dejar tarea como realizada
+  const handleTaskIsDonde = (IDTask, isDone) =>{
+    const filterTasksToID = tasks.find(taskFound => taskFound.id === IDTask)
+    if(!filterTasksToID) return
+    const copyTask = {...filterTasksToID, done: isDone}
+    const tasksWithUpdateIsDone = tasks.map(task => task.id === copyTask.id? copyTask : task)
+    setTasks(tasksWithUpdateIsDone)
+  }
+
   return (
     <div className="Todo">
       <div className="Todo__container">
         <HeaderTodo handleAddTask={handleAddTask}  taskToUpdate={taskToUpdate} handleSaveUpdateTask={handleSaveUpdateTask}/>
-        <BodyTodo tasks={tasks} handleDeleteTask={handleDeleteTask} handleUpdateTask={handleUpdateTask}/>
+        <BodyTodo tasks={tasks} handleDeleteTask={handleDeleteTask} handleUpdateTask={handleUpdateTask} handleTaskIsDonde={handleTaskIsDonde}/>
       </div>
     </div>
   );
